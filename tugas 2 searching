@@ -1,0 +1,23 @@
+void main() {
+  List<int> data = [23, 5, 16, 7, 45, 16, 9, 16]; // Daftar data yang akan dicari
+  int nilaiPencarian = 16; // Nilai yang ingin dicari 
+
+  List<int> hasilPencarian = linearSearch(data, nilaiPencarian); // Memanggil fungsi linear untuk mencari semua indeks nilaiPencarian
+
+  if (hasilPencarian.isNotEmpty) { // Jika nilaiPencarian ditemukan, mencetak semua indeksnya
+    print("Elemen $nilaiPencarian ditemukan pada indeks: $hasilPencarian");
+  } else {
+    print("Elemen $nilaiPencarian tidak ditemukan."); // Jika nilaiPencarian tidak ditemukan, mencetak pesan
+  }
+}
+List<int> linearSearch(List<int> data, int nilaiPencarian) {
+  List<int> indeksDitemukan = []; //Daftar untuk menyimpan indeks dimana nnilai ditemukan
+
+  for (int i = 0; i < data.length; i++) {
+    if (data[i] == nilaiPencarian) { //Jika sama, menambah indeks elemen saat ini ke daftar indeksDitemukan
+      indeksDitemukan.add(i);
+    }
+  }
+
+  return indeksDitemukan; //Mengembalikan daftar indeks dimana nilai ditemukan
+}=
