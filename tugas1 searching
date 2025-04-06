@@ -1,0 +1,36 @@
+void main() {
+  List<int> data = [23, 5, 12, 7, 45, 16, 9]; //List data yang akan dicari
+  int target = 16; //Data yang ingin dicari
+
+  List<MapEntry<int, int>> indexedData = data.asMap().entries.toList();
+
+  indexedData.sort((a, b) => a.value.compareTo(b.value)); //Mengurutkan daftar indexedData berdasarkan nilai secara ascending
+
+  int comparisons = 0; //Variabel untuk mmenghitung jumlah perbandingan yang dilakukan selama pencarian
+  int low = 0; // Batas bawah indeks pencarian
+  int high = indexedData.length - 1; //Batas akhir indeks pencarian
+  int foundIndex = -1; //Indeks asli dari nilai, diinisialisasi dengan -1 (tidak ditemukan)
+
+  while (low <= high) { //Melakukan pencarian biner selama batas bawah kurang dari atau sama  dengan batas atas
+    int mid = (low + high) ~/ 2; //Menghitung indeks tengah
+    comparisons++; //Menambah jumlah perbadingan
+
+//Memeriksa apakah indeks tengah sama dengan target
+    if (indexedData[mid].value == target) { 
+      foundIndex = indexedData[mid].key; //Jika sama, menyimpan indeks asli dan mengakhiri pencarian
+      break;
+    } else if (target < indexedData[mid].value) {
+      high = mid - 1; //Jika target kurang dari nilai tengah, memperbarui batas bawah
+    } else {
+      low = mid + 1; //Jika target lebih dari nilai tengah, memperbarui batas bawah
+    }
+  }
+
+  if (foundIndex != -1) { //Memeriksa apakah nilai ditemukan
+    print("Elemen $target ditemukan pada indeks asli: $foundIndex"); //Jika ditemuka mencetakn indeks asli dari nilai
+  } else {
+    print("Elemen $target tidak ditemukan."); //Mecetakn tidak ditemukan jika elemen tidak ditemukan
+  }
+
+  print("Total perbandingan: $comparisons"); //Mencetak jumlah total perbandingan yang dilakukan
+}
